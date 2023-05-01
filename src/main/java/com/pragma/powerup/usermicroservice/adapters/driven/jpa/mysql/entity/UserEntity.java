@@ -1,16 +1,12 @@
 package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "user")
@@ -22,9 +18,14 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "id_person")
-    private PersonEntity personEntity;
+    private String name;
+    private String surname;
+    private String mail;
+    private String phone;
+    private Date birthdate;
+    @Column(unique = true, nullable = false, length = 20)
+    private String dniNumber;
+    private String password;
     @ManyToOne
     @JoinColumn(name = "id_role")
     private RoleEntity roleEntity;
