@@ -4,6 +4,7 @@ import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserUseCase implements IUserServicePort {
@@ -15,7 +16,17 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public void saveUser(User user) {
-        userPersistencePort.saveUser(user);
+        Date dateNow=new Date();
+        int year=dateNow.getYear();
+        int age = year - user.getBirthdate().getYear();
+
+        if (age >= 18 && user.getRole().getName() == "ROLE_OWNER") {
+            userPersistencePort.saveUser(user);
+        }
+        if ( user.getRole().getName() != "ROLE_OWNER") {
+            userPersistencePort.saveUser(user);
+        }
+
     }
 
     @Override
