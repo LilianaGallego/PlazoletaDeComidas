@@ -1,9 +1,6 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,16 +26,19 @@ public class UserRequestDto {
     @Pattern(regexp = "^\\+?[0-9]{1,12}$", message = "The phone is not valid")
     private String phone;
 
-    @NotEmpty(message = "Birthdate may not be empty")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @NotNull(message = "Birthdate may not be empty")
+    @Past
     private Date birthdate;
 
     @NotEmpty(message = "DniNumber may not be empty")
     @Pattern(regexp = "^[0-9]{1,10}$", message = "The dniNumber is not valid")
     private String dniNumber;
+
     @NotEmpty(message = "Password may not be empty")
     private String password;
-    @NotEmpty(message = "IdRole may not be empty")
-    @Pattern(regexp = "^[0-9]{1,4}$", message = "The idRole is not valid")
+
+    @NotNull(message = "IdRole may not be empty")
+    @Min(value = 1, message = "Role id must not be less than 1")
+    @Max(value = 4, message = "Role id must not be greater than 4")
     private Long idRole;
 }
