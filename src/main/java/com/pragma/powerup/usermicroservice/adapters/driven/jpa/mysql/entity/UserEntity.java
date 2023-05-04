@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,7 +23,7 @@ public class UserEntity {
     private String surname;
     private String mail;
     private String phone;
-    private Date birthdate;
+    private LocalDate birthdate;
     @Column(unique = true, nullable = false, length = 20)
     private String dniNumber;
     private String password;

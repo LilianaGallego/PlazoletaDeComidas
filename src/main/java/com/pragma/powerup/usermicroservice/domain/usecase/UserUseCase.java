@@ -1,10 +1,12 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
+import com.pragma.powerup.usermicroservice.configuration.Constants;
+import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalAge;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
-
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class UserUseCase implements IUserServicePort {
@@ -15,16 +17,18 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public void saveUser(User user) {
-        Date dateNow=new Date();
-        int year=dateNow.getYear();
-        int age = year - user.getBirthdate().getYear();
+    public void saveUserOwner(User user) {
 
-        if (age >= 18 && user.getRole().getName() == "ROLE_OWNER") {
-            userPersistencePort.saveUser(user);
+        LocalDate localDate =  LocalDate.now();
+
+        int age = Period.between(user.getBirthdate(),localDate).getYears();
+
+        if (age >= 18 && user.getRole().getId() == Constants.OWNER_ROLE_ID) {
+            userPersistencePort.saveUserOwner(user);
         }
-        if ( user.getRole().getName() != "ROLE_OWNER") {
-            userPersistencePort.saveUser(user);
+        if (age < 18 && user.getRole().getId() == Constants.OWNER_ROLE_ID) {
+            throw new OwnerMustBeOfLegalAge();
+
         }
 
     }

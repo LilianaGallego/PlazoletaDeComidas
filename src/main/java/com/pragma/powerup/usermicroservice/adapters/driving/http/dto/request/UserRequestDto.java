@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -28,7 +29,7 @@ public class UserRequestDto {
 
     @NotNull(message = "Birthdate may not be empty")
     @Past
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @NotEmpty(message = "DniNumber may not be empty")
     @Pattern(regexp = "^[0-9]{1,10}$", message = "The dniNumber is not valid")
@@ -37,7 +38,7 @@ public class UserRequestDto {
     @NotEmpty(message = "Password may not be empty")
     private String password;
 
-    @NotNull(message = "IdRole may not be empty")
+    //@NotNull(message = "IdRole may not be empty")
     @Min(value = 1, message = "Role id must not be less than 1")
     @Max(value = 4, message = "Role id must not be greater than 4")
     private Long idRole;
