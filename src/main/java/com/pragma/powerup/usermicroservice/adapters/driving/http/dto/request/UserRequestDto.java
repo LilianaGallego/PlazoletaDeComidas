@@ -28,11 +28,11 @@ public class UserRequestDto {
     private String phone;
 
     @NotNull(message = "Birthdate may not be empty")
-    @Past
+    @Past(message = "The date must be before the current one")
     private LocalDate birthdate;
 
     @NotEmpty(message = "DniNumber may not be empty")
-    @Pattern(regexp = "^[0-9]{1,10}$", message = "The dniNumber is not valid")
+    @Pattern(regexp = "^[0-9]{1,20}$", message = "The dniNumber is not valid")
     private String dniNumber;
 
     @NotEmpty(message = "Password may not be empty")

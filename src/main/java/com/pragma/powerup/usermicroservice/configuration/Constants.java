@@ -13,9 +13,9 @@ public class Constants {
     public static final int MAX_PAGE_SIZE = 2;
     public static final String RESPONSE_MESSAGE_KEY = "message";
     public static final String USER_CREATED_MESSAGE = "User created successfully";
-    public static final String USER_DELETED_MESSAGE = "User deleted successfully";
     public static final String RESPONSE_ERROR_MESSAGE_KEY = "error";
     public static final String WRONG_CREDENTIALS_MESSAGE = "Wrong credentials";
+    public static final String ROLE_NOT_CREATED = "This role cannot be created";
     public static final String NO_DATA_FOUND_MESSAGE = "No data found for the requested petition";
     public static final String MAIL_ALREADY_EXISTS_MESSAGE = "A user with that mail already exists";
     public static final String ROLE_NOT_FOUND_MESSAGE = "No role found with the id provided";

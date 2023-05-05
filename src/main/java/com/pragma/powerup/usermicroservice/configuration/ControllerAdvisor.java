@@ -2,6 +2,7 @@ package com.pragma.powerup.usermicroservice.configuration;
 
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.*;
 import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalAge;
+import com.pragma.powerup.usermicroservice.domain.exceptions.RoleNotCreated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -83,5 +84,12 @@ public class ControllerAdvisor {
             OwnerMustBeOfLegalAge ownerMustBeOfLegalAge) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, OWNER_MUST_BE_OF_LEGAL_AGE));
+    }
+
+    @ExceptionHandler(RoleNotCreated.class)
+    public ResponseEntity<Map<String, String>> handleRoleNotCreatedException(
+            RoleNotCreated roleNotCreated) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, ROLE_NOT_CREATED));
     }
 }
