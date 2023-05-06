@@ -13,6 +13,7 @@ public class User {
     private String dniNumber;
     private String password;
     private Role role;
+     public User(){}
 
     public User(Long id, String name, String surname, String mail, String phone, LocalDate birthdate, String dniNumber, String password, Role role) {
         this.id = id;

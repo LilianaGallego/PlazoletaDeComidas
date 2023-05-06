@@ -30,34 +30,4 @@ public class UserMysqlAdapter implements IUserPersistencePort {
         userRepository.save(userEntityMapper.toEntity(user));
     }
 
-    @Override
-    public void deleteUser(User user) {
-        if (userRepository.findByIdAndRoleEntityId(user.getId(), user.getRole().getId()).isPresent()) {
-            userRepository.deleteById(user.getId());
-        }
-        else {
-            throw new UserNotFoundException();
-        }
-
-    }
-
-    @Override
-    public List<User> getAllProviders(int page) {
-        return null;
-    }
-
-    @Override
-    public User getProvider(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getEmployee(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getClient(Long id) {
-        return null;
-    }
 }
