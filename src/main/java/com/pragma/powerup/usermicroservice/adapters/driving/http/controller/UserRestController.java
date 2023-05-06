@@ -50,4 +50,15 @@ public class UserRestController {
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
 
+    @Operation(summary = "Get a owner user",
+    responses = {
+        @ApiResponse(responseCode = "200", description = "Owner user returned",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
+        @ApiResponse(responseCode = "404", description = "User not found with owner role",
+                content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @GetMapping("/owner/getOwnerById/{id}/{idRole}")
+    public ResponseEntity<UserResponseDto> getOwnerById(@PathVariable Long id, Long idRole) {
+        return ResponseEntity.ok(userHandler.getOwner(id, idRole));
+    }
+
 }

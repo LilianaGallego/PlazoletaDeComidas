@@ -1,5 +1,6 @@
 package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.MailAlreadyExistsException;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.UserAlreadyExistsException;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.UserNotFoundException;
@@ -10,7 +11,7 @@ import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class UserMysqlAdapter implements IUserPersistencePort {
@@ -28,6 +29,12 @@ public class UserMysqlAdapter implements IUserPersistencePort {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(userEntityMapper.toEntity(user));
+    }
+
+    @Override
+    public User getOwner(Long id, Long idRole) {
+        UserEntity userEntity = userRepository.findByIdAndRoleEntityId(id, idRole);
+        return userEntityMapper.toUser(userEntity);
     }
 
 }

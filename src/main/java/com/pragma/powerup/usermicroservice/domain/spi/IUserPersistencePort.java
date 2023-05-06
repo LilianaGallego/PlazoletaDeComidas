@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IUserPersistencePort {
     void saveUserOwner(User user);
+    User getOwner(Long id,Long idRole);
 
 }
