@@ -38,7 +38,7 @@ public class UserRequestDto {
     @NotEmpty(message = "Password may not be empty")
     private String password;
 
-    @NotNull(message = "IdRole may not be empty")
+    //@NotNull(message = "IdRole may not be empty")
     @Min(value = 1, message = "Role id must not be less than 1")
     @Max(value = 4, message = "Role id must not be greater than 4")
     private Long idRole;

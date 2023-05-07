@@ -1,5 +1,6 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.configuration.Constants;
 import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalAge;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
+import java.util.Optional;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
@@ -46,8 +47,8 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public User getOwner(Long id, Long idRole) {
-        return userPersistencePort.getOwner(id,idRole);
+    public User getOwner(Long id) {
+        return userPersistencePort.getOwner(id);
     }
 
 }

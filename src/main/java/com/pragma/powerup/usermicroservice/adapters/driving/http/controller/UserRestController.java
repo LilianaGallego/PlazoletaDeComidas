@@ -56,9 +56,9 @@ public class UserRestController {
                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
         @ApiResponse(responseCode = "404", description = "User not found with owner role",
                 content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/owner/getOwnerById/{id}/{idRole}")
-    public ResponseEntity<UserResponseDto> getOwnerById(@PathVariable Long id, Long idRole) {
-        return ResponseEntity.ok(userHandler.getOwner(id, idRole));
+    @GetMapping("/owner/getOwnerById/{id}")
+    public ResponseEntity<UserResponseDto> getOwnerById(@PathVariable Long id) {
+        return ResponseEntity.ok(userHandler.getOwner(id));
     }
 
 }

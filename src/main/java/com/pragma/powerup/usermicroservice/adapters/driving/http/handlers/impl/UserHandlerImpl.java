@@ -25,8 +25,8 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
-    public UserResponseDto getOwner(Long id, Long idRoler) {
-        return userResponseMapper.userResponse(userServicePort.getOwner(id,idRoler));
+    public UserResponseDto getOwner(Long id) {
+        return userResponseMapper.toResponse(userServicePort.getOwner(id));
     }
 
 }

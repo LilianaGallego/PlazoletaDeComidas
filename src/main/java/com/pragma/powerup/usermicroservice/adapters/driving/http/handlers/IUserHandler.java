@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IUserHandler {
     void saveUserOwner(UserRequestDto userRequestDto);
-    UserResponseDto getOwner(Long id, Long idRole);
+    UserResponseDto getOwner(Long id);
 
 }
