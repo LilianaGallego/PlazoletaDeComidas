@@ -33,8 +33,7 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     @Override
     public User getOwner(Long id) {
         UserEntity userEntity =userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return userEntityMapper.toUser(userEntity);
-
+        return userEntityMapper.toUser(userEntity)
 
     }
 

@@ -63,6 +63,7 @@ class UserMysqlAdapterTest {
     @DisplayName("Given an existing user dni number when saveUser then throw UserAlreadyExistsException")
     public void saveUserWithExistingDniNumberTest() {
         // Arrange
+
         User user = new User(1L, "Lili", "Gallego","lili@gmail.com","288383",
                 LocalDate.of(1989, 3, 4),"12345","123456",
                 new Role(Constants.OWNER_ROLE_ID, "ROLE_OWNER","ROLE_OWNER"));
