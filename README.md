@@ -66,13 +66,13 @@ Right-click the test folder and choose Run tests with coverage:
 ### Microservice structure
 
 - Layer adpters
-![img.png](img.png)
+![img.png](img/img3.png)
 
 - Layer configuration
-![img_1.png](img_1.png)
+![img_1.png](img/img_4.png)
 
 - Layer domain
-![img_2.png](img_2.png)
+![img_2.png](img/img_2.png)
 
 
 
