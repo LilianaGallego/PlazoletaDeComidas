@@ -1,16 +1,23 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.configuration.Constants;
 import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalAge;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
+import com.pragma.powerup.usermicroservice.domain.exceptions.RoleNotCreated;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
+import java.util.Optional;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
+
+    @Value("${my.variables.minimum-age}")
+    int minimumAge;
 
     public UserUseCase(IUserPersistencePort userPersistencePort) {
         this.userPersistencePort = userPersistencePort;
@@ -18,43 +25,32 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public void saveUserOwner(User user) {
+        if (user.getRole().getId() != Constants.OWNER_ROLE_ID){
+            throw new RoleNotCreated();
+        }
+        validateAge(user);
 
+    }
+
+    @Override
+    public void validateAge(User user){
         LocalDate localDate =  LocalDate.now();
 
         int age = Period.between(user.getBirthdate(),localDate).getYears();
 
-        if (age >= 18 && user.getRole().getId() == Constants.OWNER_ROLE_ID) {
-            userPersistencePort.saveUserOwner(user);
-        }
-        if (age < 18 && user.getRole().getId() == Constants.OWNER_ROLE_ID) {
+        if (age < minimumAge ) {
             throw new OwnerMustBeOfLegalAge();
-
         }
 
+        userPersistencePort.saveUserOwner(user);
+
     }
 
     @Override
-    public void deleteUser(User user) {
-        userPersistencePort.deleteUser(user);
+    public User getOwner(Long id) {
+
+
+        return userPersistencePort.getOwner(id);
     }
 
-    @Override
-    public List<User> getAllProviders(int page) {
-        return userPersistencePort.getAllProviders(page);
-    }
-
-    @Override
-    public User getProvider(Long id) {
-        return userPersistencePort.getProvider(id);
-    }
-
-    @Override
-    public User getEmployee(Long id) {
-        return userPersistencePort.getEmployee(id);
-    }
-
-    @Override
-    public User getClient(Long id) {
-        return userPersistencePort.getClient(id);
-    }
 }

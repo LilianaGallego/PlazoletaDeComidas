@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface IUserHandler {
     void saveUserOwner(UserRequestDto userRequestDto);
-    void deleteUser(UserRequestDto userRequestDto);
-    List<UserResponseDto> getProvider(Integer page);
-    UserResponseDto getProvider(Long id);
-    UserResponseDto getEmployee(Long id);
-    UserResponseDto getClient(Long id);
+    UserResponseDto getOwner(Long id);
 
 }

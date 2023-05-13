@@ -3,10 +3,8 @@ package com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @Getter
@@ -20,19 +18,19 @@ public class UserRequestDto {
     private String surname;
 
     @NotEmpty(message = "Email may not be empty")
-    @Email(message = "The email is not valid")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$", message = "The email is not valid")
     private String mail;
 
     @NotEmpty(message = "Phone may not be empty")
-    @Pattern(regexp = "^\\+?[0-9]{1,12}$", message = "The phone is not valid")
+    @Pattern(regexp = "^\\+?[0-9]{12}$", message = "The phone is not valid")
     private String phone;
 
     @NotNull(message = "Birthdate may not be empty")
-    @Past
+    @Past(message = "The date must be before the current one")
     private LocalDate birthdate;
 
     @NotEmpty(message = "DniNumber may not be empty")
-    @Pattern(regexp = "^[0-9]{1,10}$", message = "The dniNumber is not valid")
+    @Pattern(regexp = "^[0-9]{1,20}$", message = "The dniNumber is not valid")
     private String dniNumber;
 
     @NotEmpty(message = "Password may not be empty")

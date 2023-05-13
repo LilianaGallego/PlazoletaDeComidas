@@ -1,5 +1,6 @@
 package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.adapter;
 
+import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.MailAlreadyExistsException;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.UserAlreadyExistsException;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.UserNotFoundException;
@@ -10,7 +11,6 @@ import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 public class UserMysqlAdapter implements IUserPersistencePort {
@@ -31,33 +31,10 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public void deleteUser(User user) {
-        if (userRepository.findByIdAndRoleEntityId(user.getId(), user.getRole().getId()).isPresent()) {
-            userRepository.deleteById(user.getId());
-        }
-        else {
-            throw new UserNotFoundException();
-        }
+    public User getOwner(Long id) {
+        UserEntity userEntity =userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        return userEntityMapper.toUser(userEntity);
 
     }
 
-    @Override
-    public List<User> getAllProviders(int page) {
-        return null;
-    }
-
-    @Override
-    public User getProvider(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getEmployee(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getClient(Long id) {
-        return null;
-    }
 }

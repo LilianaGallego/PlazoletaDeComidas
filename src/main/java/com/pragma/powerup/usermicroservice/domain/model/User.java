@@ -11,11 +11,11 @@ public class User {
     private String phone;
     private LocalDate birthdate;
     private String dniNumber;
-    private String idPersonType;
     private String password;
     private Role role;
+     public User(){}
 
-    public User(Long id, String name, String surname, String mail, String phone, LocalDate birthdate, String dniNumber, String idPersonType, String password, Role role) {
+    public User(Long id, String name, String surname, String mail, String phone, LocalDate birthdate, String dniNumber, String password, Role role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -23,7 +23,6 @@ public class User {
         this.phone = phone;
         this.birthdate = birthdate;
         this.dniNumber = dniNumber;
-        this.idPersonType = idPersonType;
         this.password = password;
         this.role = role;
     }
@@ -82,14 +81,6 @@ public class User {
 
     public void setDniNumber(String dniNumber) {
         this.dniNumber = dniNumber;
-    }
-
-    public String getIdPersonType() {
-        return idPersonType;
-    }
-
-    public void setIdPersonType(String idPersonType) {
-        this.idPersonType = idPersonType;
     }
 
     public String getPassword() {
