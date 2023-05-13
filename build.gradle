@@ -55,7 +55,9 @@ jacocoTestReport {
 										'com/pragma/powerup/usermicroservice/adapters/driving/http/mapper',
 										'com/pragma/powerup/usermicroservice/domain/model',
 										'com/pragma/powerup/usermicroservice/adapters/driving/http/dto/response',
-										'com/pragma/powerup/usermicroservice/adapters/driven/jpa/mysql/exceptions'])
+										'com/pragma/powerup/usermicroservice/adapters/driven/jpa/mysql/exceptions',
+										'com/pragma/powerup/usermicroservice/adapters/driven/jpa/mysql/entity',
+										'com/pragma/powerup/usermicroservice/adapters/driving/http/handlers/impl',])
 		}))
 	}
 }
