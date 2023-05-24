@@ -10,7 +10,7 @@ class LoginRequestDtoTest {
     void testGetters() {
         LoginRequestDto loginRequestDto = new LoginRequestDto("123", "1234");
 
-        assertEquals("123", loginRequestDto.getUserDni());
+        assertEquals("123", loginRequestDto.getMail());
         assertEquals("1234", loginRequestDto.getPassword());
     }
 }
