@@ -18,7 +18,7 @@ public class UserRequestDto {
     private String surname;
 
     @NotEmpty(message = "Email may not be empty")
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$", message = "The email is not valid")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "The email is not valid")
     private String mail;
 
     @NotEmpty(message = "Phone may not be empty")

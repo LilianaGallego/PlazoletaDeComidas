@@ -21,7 +21,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AuthHandlerImplTest {
+class AuthHandlerImplTest {
 
     @Mock
     private AuthenticationManager authenticationManager;
@@ -33,13 +33,13 @@ public class AuthHandlerImplTest {
     private AuthHandlerImpl authHandler;
 
     @Test
-    public void login_shouldReturnJwtResponseDto_whenValidUserCredentialsProvided() {
+    void login_shouldReturnJwtResponseDto_whenValidUserCredentialsProvided() {
 
         // Arrange
         String token = "token";
         LoginRequestDto loginRequestDto = new LoginRequestDto("123", "123");
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
-                .username(loginRequestDto.getUserDni())
+                .username(loginRequestDto.getMail())
                 .password(loginRequestDto.getPassword())
                 .authorities(Collections.emptyList())
                 .build();
@@ -49,7 +49,7 @@ public class AuthHandlerImplTest {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         Mockito.when(authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getUserDni(), loginRequestDto.getPassword())))
+                new UsernamePasswordAuthenticationToken(loginRequestDto.getMail(), loginRequestDto.getPassword())))
                 .thenReturn(authentication);
 
         Mockito.when(jwtProvider.generateToken(authentication)).thenReturn(token);
