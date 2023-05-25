@@ -38,6 +38,7 @@ public class JwtProvider {
         List<String> roles = usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         return Jwts.builder()
                 .setSubject(usuarioPrincipal.getUsername())
+                .claim("id",usuarioPrincipal.getId())
                 .claim("roles", roles)
                 .claim("email", usuarioPrincipal.getEmail())
                 .setIssuedAt(new Date())
