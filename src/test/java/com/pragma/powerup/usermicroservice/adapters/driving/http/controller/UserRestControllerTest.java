@@ -2,6 +2,7 @@ package com.pragma.powerup.usermicroservice.adapters.driving.http.controller;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.UserRequestDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.UserResponseDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IUserHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.pragma.powerup.usermicroservice.configuration.Constants;
-import org.junit.jupiter.api.DisplayName;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -30,12 +30,12 @@ class UserRestControllerTest {
     @InjectMocks
     private UserRestController userRestController;
 
-
+    @InjectMocks
     private UserRequestDto userRequestDto;
 
     @BeforeEach
     void setUp() {
-        UserRequestDto userRequestDto = new UserRequestDto("Lili", "Gallego","lili@gmail.com","288383", LocalDate.of(1989, 3, 4),"12345","123456", 1L);
+       userRequestDto = new UserRequestDto("Lili", "Gallego","lili@gmail.com","288383", LocalDate.of(1989, 3, 4),"12345","123456", 1L);
     }
 
     @Test
@@ -52,7 +52,6 @@ class UserRestControllerTest {
     }
 
     @Test
-    @DisplayName("Given a valid user, when saveUser is called, then a CREATED response is returned")
     void testSaveUserEmployee() {
         // Arrange
         Mockito.doNothing().when(userHandler).saveUserEmployee(userRequestDto);
