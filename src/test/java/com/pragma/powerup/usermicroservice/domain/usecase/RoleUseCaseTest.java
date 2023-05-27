@@ -25,7 +25,7 @@ class RoleUseCaseTest {
     private RoleUseCase roleUseCase;
 
     @Test
-    public void givenNoRoles_whenGetAllRoles_thenReturnEmptyList() {
+    void givenNoRoles_whenGetAllRoles_thenReturnEmptyList() {
         // Arrange
         Mockito.when(rolePersistencePort.getAllRoles()).thenReturn(Collections.emptyList());
 
@@ -37,11 +37,11 @@ class RoleUseCaseTest {
     }
 
     @Test
-    public void givenRolesExist_whenGetAllRoles_thenReturnListOfRoles() {
+    void givenRolesExist_whenGetAllRoles_thenReturnListOfRoles() {
         // Arrange
         List<Role> expectedRoles = Arrays.asList(
                 new Role(1L, "ROLE_ADMIN", "ROLE_ADMIN"),
-                new Role(2l, "ROLE_OWNER", "ROLE_OWNER")
+                new Role(2L, "ROLE_OWNER", "ROLE_OWNER")
         );
         Mockito.when(rolePersistencePort.getAllRoles()).thenReturn(expectedRoles);
 
