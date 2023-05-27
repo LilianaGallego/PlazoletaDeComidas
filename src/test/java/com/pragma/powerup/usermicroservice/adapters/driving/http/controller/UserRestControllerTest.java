@@ -86,4 +86,17 @@ class UserRestControllerTest {
         verify(userHandler, times(1)).getOwner(ownerId);
     }
 
+    @Test
+    void testSaveUserClient() {
+        // Arrange
+        Mockito.doNothing().when(userHandler).saveUserClient(userRequestDto);
+
+        // Act
+        ResponseEntity<Map<String, String>> responseEntity = userRestController.saveUserClient(userRequestDto);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertEquals(Constants.USER_CREATED_MESSAGE, responseEntity.getBody().get(Constants.RESPONSE_MESSAGE_KEY));
+    }
+
 }
