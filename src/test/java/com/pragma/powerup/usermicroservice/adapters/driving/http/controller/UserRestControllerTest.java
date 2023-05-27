@@ -1,7 +1,6 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.controller;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.UserRequestDto;
-import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IUserHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +19,10 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @ExtendWith(MockitoExtension.class)
-public class UserRestControllerTest {
+class UserRestControllerTest {
 
     @Mock
-    private IUserHandler userHandler;
+    private com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IUserHandler userHandler;
 
     @InjectMocks
     private UserRestController userRestController;
