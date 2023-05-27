@@ -39,7 +39,7 @@ class UserMysqlAdapterTest {
 
     @Test
     @DisplayName("Given a user when saveUser then save the user in the repository")
-    public void saveUserTest() {
+    void saveUserTest() {
         // Arrange
         User user = new User(1L, "Lili", "Gallego","lili@gmail.com","288383",
                 LocalDate.of(1989, 3, 4),"12345","123456",
@@ -53,7 +53,7 @@ class UserMysqlAdapterTest {
         Mockito.when(userEntityMapper.toEntity(user)).thenReturn(userEntity);
 
         // Act
-        userMysqlAdapter.saveUserOwner(user);
+        userMysqlAdapter.saveUser(user);
 
         // Assert
         verify(userRepository, times(1)).save(userEntity);
@@ -61,7 +61,7 @@ class UserMysqlAdapterTest {
 
     @Test
     @DisplayName("Given an existing user dni number when saveUser then throw UserAlreadyExistsException")
-    public void saveUserWithExistingDniNumberTest() {
+    void saveUserWithExistingDniNumberTest() {
         // Arrange
 
         User user = new User(1L, "Lili", "Gallego","lili@gmail.com","288383",
@@ -70,12 +70,12 @@ class UserMysqlAdapterTest {
         when(userRepository.findByDniNumber(user.getDniNumber())).thenReturn(Optional.of(new UserEntity()));
 
         // Act & Assert
-        Assertions.assertThrows(UserAlreadyExistsException.class, () -> userMysqlAdapter.saveUserOwner(user));
+        Assertions.assertThrows(UserAlreadyExistsException.class, () -> userMysqlAdapter.saveUser(user));
     }
 
     @Test
     @DisplayName("Given an existing user email when saveUser then throw MailAlreadyExistsException")
-    public void saveUserWithExistingEmailTest() {
+    void saveUserWithExistingEmailTest() {
         // Arrange
         User user = new User(1L, "Lili", "Gallego","lili@gmail.com","288383",
                 LocalDate.of(1989, 3, 4),"12345","123456",
@@ -84,6 +84,6 @@ class UserMysqlAdapterTest {
         when(userRepository.existsByMail(user.getMail())).thenReturn(true);
 
         // Act & Assert
-        Assertions.assertThrows(MailAlreadyExistsException.class, () -> userMysqlAdapter.saveUserOwner(user));
+        Assertions.assertThrows(MailAlreadyExistsException.class, () -> userMysqlAdapter.saveUser(user));
     }
 }
