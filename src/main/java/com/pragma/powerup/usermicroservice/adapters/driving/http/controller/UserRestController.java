@@ -26,7 +26,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
-@SecurityRequirement(name = "jwt")
 public class UserRestController {
     private final IUserHandler userHandler;
 
@@ -38,7 +37,8 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
                     @ApiResponse(responseCode = "403", description = "Role not allowed for user creation",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PostMapping("/createOwner")
+    @SecurityRequirement(name = "jwt")
+    @PostMapping("/owner/createOwner")
     public ResponseEntity<Map<String, String>> saveUserOwner(@Valid @RequestBody UserRequestDto userRequestDto) {
         userHandler.saveUserOwner(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -51,9 +51,26 @@ public class UserRestController {
                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
         @ApiResponse(responseCode = "404", description = "User not found with owner role",
                 content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @SecurityRequirement(name = "jwt")
     @GetMapping("/owner/getOwnerById/{id}")
     public ResponseEntity<UserResponseDto> getOwnerById(@PathVariable Long id) {
         return ResponseEntity.ok(userHandler.getOwner(id));
+    }
+
+    @Operation(summary = "Add a new employee",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Employee created",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                    @ApiResponse(responseCode = "409", description = "User already exists",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
+                    @ApiResponse(responseCode = "403", description = "Role not allowed for user creation",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @SecurityRequirement(name = "jwt")
+    @PostMapping("/employee/createEmployee")
+    public ResponseEntity<Map<String, String>> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
+        userHandler.saveUserEmployee(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
 
 }

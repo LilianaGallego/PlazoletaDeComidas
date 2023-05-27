@@ -20,4 +20,40 @@ class UserRequestDtoTest {
         assertEquals("123456", userRequestDto.getPassword());
         assertEquals(1L, userRequestDto.getIdRole());
     }
+
+    @Test
+    void testSetters() {
+        // Arrange
+        String name = "Lili";
+        String surname = "Gallego";
+        String mail = "lili@gmail.com";
+        String phone = "+1234567890";
+        LocalDate birthdate = LocalDate.of(2000, 1, 1);
+        String dniNumber = "123456789";
+        String password = "password";
+        Long idRole = 1L;
+
+        UserRequestDto userRequestDto = new UserRequestDto();
+
+        // Act
+        userRequestDto.setName(name);
+        userRequestDto.setSurname(surname);
+        userRequestDto.setMail(mail);
+        userRequestDto.setPhone(phone);
+        userRequestDto.setBirthdate(birthdate);
+        userRequestDto.setDniNumber(dniNumber);
+        userRequestDto.setPassword(password);
+        userRequestDto.setIdRole(idRole);
+
+        // Assert
+        assertEquals(name, userRequestDto.getName());
+        assertEquals(surname, userRequestDto.getSurname());
+        assertEquals(mail, userRequestDto.getMail());
+        assertEquals(phone, userRequestDto.getPhone());
+        assertEquals(birthdate, userRequestDto.getBirthdate());
+        assertEquals(dniNumber, userRequestDto.getDniNumber());
+        assertEquals(password, userRequestDto.getPassword());
+        assertEquals(idRole, userRequestDto.getIdRole());
+    }
+
 }

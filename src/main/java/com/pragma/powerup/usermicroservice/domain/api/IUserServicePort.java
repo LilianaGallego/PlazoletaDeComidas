@@ -4,7 +4,8 @@ import com.pragma.powerup.usermicroservice.domain.model.User;
 
 
 public interface IUserServicePort {
-    void saveUserOwner(User user);
+    void saveUser(User user);
     void validateAge(User user);
     User getOwner(Long id);
+
 }

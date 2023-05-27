@@ -19,12 +19,19 @@ public class UserHandlerImpl implements IUserHandler {
 
     @Override
     public void saveUserOwner(UserRequestDto userRequestDto) {
-        userServicePort.saveUserOwner(userRequestMapper.toUser(userRequestDto));
+        userRequestDto.setIdRole(2L);
+        userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
     }
 
     @Override
     public UserResponseDto getOwner(Long id) {
         return userResponseMapper.toResponse(userServicePort.getOwner(id));
+    }
+
+    @Override
+    public void saveUserEmployee(UserRequestDto userRequestDto) {
+        userRequestDto.setIdRole(4L);
+        userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
     }
 
 }

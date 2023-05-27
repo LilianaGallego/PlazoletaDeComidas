@@ -34,7 +34,7 @@ class UserHandlerImplTest {
     }
 
     @Test
-    public void saveUser_ShouldCallSaveUserInServicePort() {
+    void saveUser_ShouldCallSaveUserInServicePort() {
         // Arrange
         UserRequestDto userRequestDto = new UserRequestDto("Lili", "Gallego","lili@gmail.com","288383", LocalDate.of(1989, 3, 4),"12345","123456", 1L);
         User user = new User();
@@ -44,6 +44,6 @@ class UserHandlerImplTest {
         userHandler.saveUserOwner(userRequestDto);
 
         // Assert
-        verify(userServicePort, times(1)).saveUserOwner(user);
+        verify(userServicePort, times(1)).saveUser(user);
     }
 }
