@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @ExtendWith(MockitoExtension.class)
-public class UserRestControllerTest {
+class UserRestControllerTest {
 
     @Mock
     private IUserHandler userHandler;

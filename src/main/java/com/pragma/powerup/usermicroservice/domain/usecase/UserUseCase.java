@@ -1,17 +1,13 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
-import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
-import com.pragma.powerup.usermicroservice.configuration.Constants;
 import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalAge;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
-import com.pragma.powerup.usermicroservice.domain.exceptions.RoleNotCreated;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Optional;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
@@ -24,10 +20,8 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public void saveUserOwner(User user) {
-        if (user.getRole().getId() != Constants.OWNER_ROLE_ID){
-            throw new RoleNotCreated();
-        }
+    public void saveUser(User user) {
+
         validateAge(user);
 
     }
@@ -42,13 +36,12 @@ public class UserUseCase implements IUserServicePort {
             throw new OwnerMustBeOfLegalAge();
         }
 
-        userPersistencePort.saveUserOwner(user);
+        userPersistencePort.saveUser(user);
 
     }
 
     @Override
     public User getOwner(Long id) {
-
 
         return userPersistencePort.getOwner(id);
     }

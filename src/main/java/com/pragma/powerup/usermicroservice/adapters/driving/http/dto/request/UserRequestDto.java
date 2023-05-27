@@ -1,13 +1,15 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 public class UserRequestDto {
     @NotEmpty(message = "Name may not be empty")
     @Size(min = 3, max = 40, message = "Name must be between 3 and 40 characters long")
@@ -36,8 +38,6 @@ public class UserRequestDto {
     @NotEmpty(message = "Password may not be empty")
     private String password;
 
-    //@NotNull(message = "IdRole may not be empty")
-    @Min(value = 1, message = "Role id must not be less than 1")
-    @Max(value = 4, message = "Role id must not be greater than 4")
+    @JsonIgnore
     private Long idRole;
 }

@@ -1,8 +1,6 @@
 package com.pragma.powerup.usermicroservice.domain.model;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 public class User {
     private Long id;
     private String name;
