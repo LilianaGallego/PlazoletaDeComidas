@@ -67,10 +67,35 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @SecurityRequirement(name = "jwt")
     @PostMapping("/employee/createEmployee")
-    public ResponseEntity<Map<String, String>> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
-        userHandler.saveUserEmployee(userRequestDto);
+    public ResponseEntity<String> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
+
+        return ResponseEntity.ok(userHandler.saveUserEmployee(userRequestDto));
+    }
+
+    @Operation(summary = "Add a new client",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Client created",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                    @ApiResponse(responseCode = "409", description = "User already exists",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
+                    @ApiResponse(responseCode = "403", description = "Role not allowed for user creation",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @PostMapping("/client/createClient")
+    public ResponseEntity<Map<String, String>> saveUserClient(@Valid @RequestBody UserRequestDto userRequestDto) {
+        userHandler.saveUserClient(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
 
+    @Operation(summary = "Get a Employee user",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Employee user returned",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "User not found with Employee role",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @SecurityRequirement(name = "jwt")
+    @GetMapping("/employee/getEmployeeByDni/{dni}")
+    public ResponseEntity<UserResponseDto> getEmployee(@PathVariable String dni) {
+        return ResponseEntity.ok(userHandler.getEmploye(dni));
+    }
 }
