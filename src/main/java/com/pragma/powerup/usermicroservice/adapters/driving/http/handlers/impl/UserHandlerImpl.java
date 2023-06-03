@@ -34,9 +34,9 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
-    public String saveUserEmployee(UserRequestDto userRequestDto) {
+    public void saveUserEmployee(UserRequestDto userRequestDto) {
         userRequestDto.setIdRole(4L);
-        return userServicePort.saveUserEmployee(userRequestMapper.toUser(userRequestDto));
+        userServicePort.saveUserEmployee(userRequestMapper.toUser(userRequestDto));
 
     }
 

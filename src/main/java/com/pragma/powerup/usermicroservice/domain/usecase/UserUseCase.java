@@ -27,10 +27,9 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public String saveUserEmployee(User user) {
+    public void saveUserEmployee(User user) {
 
         validateAge(user);
-        return user.getDniNumber();
     }
 
     @Override
