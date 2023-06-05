@@ -29,9 +29,15 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
+    public UserResponseDto getEmploye(String dni) {
+        return userResponseMapper.toResponse(userServicePort.getEmployee(dni));
+    }
+
+    @Override
     public void saveUserEmployee(UserRequestDto userRequestDto) {
         userRequestDto.setIdRole(4L);
-        userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
+        userServicePort.saveUserEmployee(userRequestMapper.toUser(userRequestDto));
+
     }
 
     @Override

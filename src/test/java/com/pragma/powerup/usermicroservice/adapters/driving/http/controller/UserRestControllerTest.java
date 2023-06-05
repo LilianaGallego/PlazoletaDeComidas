@@ -62,18 +62,16 @@ class UserRestControllerTest {
         // Assert
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(Constants.USER_CREATED_MESSAGE, responseEntity.getBody().get(Constants.RESPONSE_MESSAGE_KEY));
+
     }
 
     @Test
-    void testGetOwnerById() throws Exception {
+    void testGetOwnerById() {
         // Arrange
         Long ownerId = 1L;
 
-        UserResponseDto responseDto = new UserResponseDto(
-
-                "Lili", "Gallego", "lili@gmail.com", "288383",
-                LocalDate.of(1989, 3, 4), "12345", "123456", 1L
-        );
+        UserResponseDto responseDto = new UserResponseDto(1L,"LILI","Gallego",
+                "lili@gmail.com","288383", LocalDate.of(1989, 3, 4),"12345","123456", 1L);
 
         when(userHandler.getOwner(ownerId)).thenReturn(responseDto);
 

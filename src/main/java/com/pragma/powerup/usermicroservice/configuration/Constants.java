@@ -23,6 +23,7 @@ public class Constants {
     public static final String USER_ALREADY_EXISTS_MESSAGE = "A user already exists with the role provided";
     public static final String USER_NOT_FOUND_MESSAGE = "No user found with the role provided";
     public static final String OWNER_MUST_BE_OF_LEGAL_AGE = "The owner must be of legal age";
+    public static final String HTTP_MESSAGE_NOT_READABLE_EXCEPTION = "The field cannot be null or exceed its characters";
     public static final String SWAGGER_TITLE_MESSAGE = "User API Pragma Power Up";
     public static final String SWAGGER_DESCRIPTION_MESSAGE = "User microservice";
     public static final String SWAGGER_VERSION_MESSAGE = "1.0.0";

@@ -69,9 +69,10 @@ public class UserRestController {
     @PostMapping("/employee/createEmployee")
     public ResponseEntity<Map<String, String>> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
         userHandler.saveUserEmployee(userRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
+
 
     @Operation(summary = "Add a new client",
             responses = {
@@ -87,5 +88,17 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
+    @Operation(summary = "Get a Employee user",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Employee user returned",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "User not found with Employee role",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @SecurityRequirement(name = "jwt")
+    @GetMapping("/employee/getEmployeeByDni/{dni}")
+    public ResponseEntity<UserResponseDto> getEmployee(@PathVariable String dni) {
+        return ResponseEntity.ok(userHandler.getEmploye(dni));
+    }
+
 
 }

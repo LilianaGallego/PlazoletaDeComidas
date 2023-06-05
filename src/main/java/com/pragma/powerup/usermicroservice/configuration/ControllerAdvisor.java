@@ -5,6 +5,7 @@ import com.pragma.powerup.usermicroservice.domain.exceptions.OwnerMustBeOfLegalA
 import com.pragma.powerup.usermicroservice.domain.exceptions.RoleNotCreated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -91,5 +92,12 @@ public class ControllerAdvisor {
             RoleNotCreated roleNotCreated) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, ROLE_NOT_CREATED));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, String>> handleHttpMessageNotReadableException(
+            HttpMessageNotReadableException httpMessageNotReadableException) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, HTTP_MESSAGE_NOT_READABLE_EXCEPTION));
     }
 }

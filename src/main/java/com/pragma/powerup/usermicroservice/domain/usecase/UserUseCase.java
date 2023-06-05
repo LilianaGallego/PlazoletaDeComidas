@@ -27,6 +27,12 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
+    public void saveUserEmployee(User user) {
+
+        validateAge(user);
+    }
+
+    @Override
     public void validateAge(User user){
         LocalDate localDate =  LocalDate.now();
 
@@ -44,6 +50,12 @@ public class UserUseCase implements IUserServicePort {
     public User getOwner(Long id) {
 
         return userPersistencePort.getOwner(id);
+    }
+
+    @Override
+    public User getEmployee(String  dni) {
+
+        return userPersistencePort.getEmployee(dni);
     }
 
 }
