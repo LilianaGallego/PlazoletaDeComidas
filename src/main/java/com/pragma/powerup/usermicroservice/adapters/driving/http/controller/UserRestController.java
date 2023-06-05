@@ -67,9 +67,11 @@ public class UserRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
     @SecurityRequirement(name = "jwt")
     @PostMapping("/employee/createEmployee")
-    public ResponseEntity<String> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<Map<String, String>> saveUserEmployee(@Valid @RequestBody UserRequestDto userRequestDto) {
 
-        return ResponseEntity.ok(userHandler.saveUserEmployee(userRequestDto));
+        userHandler.saveUserEmployee(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
     }
 
     @Operation(summary = "Get a Employee user",

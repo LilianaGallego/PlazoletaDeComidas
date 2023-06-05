@@ -7,7 +7,7 @@ public interface IUserHandler {
     void saveUserOwner(UserRequestDto userRequestDto);
     UserResponseDto getOwner(Long id);
     UserResponseDto getEmploye(String dni);
-    String saveUserEmployee(UserRequestDto userRequestDto);
+    void saveUserEmployee(UserRequestDto userRequestDto);
 
 
 }
