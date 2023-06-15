@@ -100,5 +100,15 @@ public class UserRestController {
         return ResponseEntity.ok(userHandler.getEmploye(dni));
     }
 
-
+    @Operation(summary = "Get a client user",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Client user returned",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "User not found with client role",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @SecurityRequirement(name = "jwt")
+    @GetMapping("/client/byId/{id}")
+    public ResponseEntity<UserResponseDto> getClientById(@PathVariable Long id) {
+        return ResponseEntity.ok(userHandler.getOwner(id));
+    }
 }
